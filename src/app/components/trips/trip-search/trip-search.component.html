@@ -1,0 +1,185 @@
+<div class="search-bar" [formGroup]="searchForm">
+  <div class="search-field">
+    <input type="text" placeholder="Départ" formControlName="departure" class="form-control" [ngClass]="{'is-invalid': searchForm.controls['departure'].touched && searchForm.controls['departure'].invalid}" />
+  </div>
+  <input type="text" placeholder="Destination" formControlName="arrival" class="form-control" [ngClass]="{'is-invalid': searchForm.controls['arrival'].touched && searchForm.controls['arrival'].invalid}" />
+  <div class="search-field">
+    <input
+    class="form-control"
+      [ngClass]="{'is-invalid': searchForm.controls['date'].touched && searchForm.controls['date'].invalid}"
+    placeholder="yyyy-mm-dd"
+    name="dp"
+    formControlName="date"
+    ngbDatepicker
+    [minDate]="minDate"
+    #d="ngbDatepicker"
+  />
+  <button class="btn btn-rounded btn-success feather icon-calendar" (click)="d.toggle()" type="button"></button>
+  </div>
+  <select name="passengers" formControlName="availableSeats" class="form-control" [ngClass]="{'is-invalid': searchForm.controls['availableSeats'].touched && searchForm.controls['availableSeats'].invalid}">
+    <option value="1">1 passager</option>
+    <option value="2">2 passagers</option>
+    <option value="3">3 passagers</option>
+  </select>
+  <button class="btn btn-rounded btn-success" (click)="search()">Rechercher</button>
+</div>
+<div class="row" style="padding-top: 30px;" *ngIf="carPoolTrips && carPoolTrips.length > 0">
+  <div class="col-sm-12">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col col-lg-4">
+          <h3>Les trajets pour {{carPoolTrips[0]?.date}}</h3>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="card">
+      <div class="card-header">
+        <button
+          type="button"
+          class="btn btn-rounded btn-success ms-2"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed"
+          aria-controls="collapseExample"
+        >
+          Filtre
+        </button>
+      </div>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xs-12 col-4">
+              <h4>Trier par</h4>
+              <div class="custom-control custom-radio custom-control-inline mb-1">
+                <input
+                  type="radio"
+                  id="plustot"
+                  name="sortOption"
+                  [(ngModel)]="sortOption"
+                  value="departure"
+                  class="custom-control-input"
+                />
+                <label class="custom-control-label ps-2" for="plustot">Départ le plus tôt</label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  type="radio"
+                  id="moinscher"
+                  name="sortOption"
+                  [(ngModel)]="sortOption"
+                  value="priceSort"
+                  class="custom-control-input"
+                />
+                <label class="custom-control-label ps-2" for="moinscher">Prix le plus bas</label>
+              </div>
+            </div>
+            <div class="col-xs-12 col-4">
+              <h4>Services et équipements</h4>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="petsFilter" id="pets" />
+                <label class="custom-control-label ps-2" for="pets">Animaux de compagnie autorisés</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="cigaretteFilter" id="cigarette" />
+                <label class="custom-control-label ps-2" for="cigarette">Cigarette autorisées</label>
+              </div>
+            </div>
+            <div class="col-xs-12 col-4">
+              <div class="container">
+                <div class="row justify-content-md-center">
+                  <div class="col col-lg-4">
+                    <button
+              type="button"
+              class="btn btn-rounded btn-success ms-2"
+              (click)="sort()"
+              [attr.aria-expanded]="!isCollapsed"
+              aria-controls="collapseExample"
+            >
+              Appliquer
+            </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [ basic-collapse ] end -->
+</div>
+<div class="container" *ngIf="carPoolTrips && carPoolTrips.length > 0">
+  <div class="row justify-content-md-center">
+
+    <div class="banner">
+
+      <div class="search-form col-6" *ngFor="let carPoolTrip of carPoolTripsFilter">
+        <div class="row">
+          <div class="col-6">
+            <div class="timeline-container">
+              <!-- Départ -->
+              <div class="city-info">
+                <div class="hour">{{carPoolTrip.start}}</div>
+                <div class="city">{{carPoolTrip.departure}}</div>
+              </div>
+
+              <!-- Ligne avec cercle au milieu -->
+              <div class="line"></div>
+
+              <!-- Arrivée -->
+              <div class="city-info">
+                <div class="hour">{{carPoolTrip.end}}</div>
+                <div class="city">{{carPoolTrip.arrival}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h3 style="float: inline-end;">{{carPoolTrip.price}} DT</h3>
+          </div>
+        </div>
+        <div class="row" style="text-align: justify;">
+          <i class="fas fa-paw" style="color: green;" *ngIf="carPoolTrip.petsAllowed"> Animaux autorisés</i>
+          <span style="position: relative; display: inline-block; height: 2em; margin-left: 12px; color: red;" *ngIf="!carPoolTrip.petsAllowed">
+            <i class="fas fa-ban" style="position: absolute; top: 0; left: 0;"></i>
+            <i class="fas fa-paw" style="position: absolute; top: 0; left: 0;">Animaux non autorisés</i>
+          </span>
+          <br/>
+          <i class="fas fa-smoking" style="color: green;" *ngIf="carPoolTrip.smokingAllowed"> Cigarette autorisées</i>
+          <i class="fas fa-smoking-ban" style="color: red;" *ngIf="!carPoolTrip.smokingAllowed"> Cigarette non autorisées</i>
+        </div>
+        <div class="row" style="text-align: justify;">
+          <button class=" btn btn-rounded btn-success btn-book" (click)="goToBookingTrip(carPoolTrip.id)">Détails</button>
+        </div>
+        <hr>
+        <span style="display: flex;">
+          <span>
+            <i class="fas fa-car fa-xl"></i>
+          </span>
+          <div class="pro-head" style="margin-top: -10px;">
+
+            <img [src]="carPoolTrip?.gender == 'homme'? hommeSrc : femmeSrc" class="img-radius" style="width: 50%;" alt="User-Profile-Image" />
+          </div>
+          <span>{{carPoolTrip.driverFullName}}</span>
+          <span style="margin-left: 15px;">
+            <i class="fas fa-star"></i>
+            {{carPoolTrip.rate}}
+          </span>
+          <span style="margin-left: 40%;" *ngIf="isUserConnected">
+            <i class="feather icon-arrow-right" style="cursor: pointer;" (click)="goToDriver(carPoolTrip.user_id)"></i>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!carPoolTrips || carPoolTrips.length == 0">
+  <div class="row justify-content-md-center">
+    <div class="col-3">
+      <img src="/assets/images/no-data.png">
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,88 @@
+.banner {
+  background: url('/assets/images/home_bg.png') center/cover no-repeat;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  position: relative;
+
+  .banner-text h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+
+  .search-bar {
+    display: flex;
+    gap: 1rem;
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    bottom: -40px;
+
+    input, select {
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    button {
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .search-field {
+      display: contents;
+      align-items: center;
+      gap: 0.5rem;
+
+      input,
+      select {
+        border: none;
+        outline: none;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}
+
+.features {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+
+  .feature-item {
+    text-align: center;
+    max-width: 300px;
+
+    img {
+      width: 40px;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      color: #004b5e;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+  }
+}
+.icon{
+  height: 30px;
+}

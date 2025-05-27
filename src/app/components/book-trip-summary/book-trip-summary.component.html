@@ -1,0 +1,38 @@
+<div class="trip-summary-card" *ngIf="carPoolTrip">
+  <h2>Résumé du trajet</h2>
+
+  <div class="trip-info">
+    <p><strong>Date :</strong> {{carPoolTrip.date}}</p>
+    <p><strong>Heure :</strong> {{carPoolTrip.start}}</p>
+    <p><strong>De :</strong> {{carPoolTrip.departure}}</p>
+    <p><strong>À :</strong> {{carPoolTrip.arrival}}</p>
+  </div>
+
+  <div class="driver-info">
+    <img [src]="carPoolTrip?.driverGender == 'homme'? hommeSrc : femmeSrc" alt="Photo conducteur" class="driver-photo" />
+    <div class="driver-name">{{carPoolTrip.driverFullName}}</div>
+  </div>
+
+  <div class="trip-details">
+    <p><strong>Durée :</strong> {{carPoolTrip.duration}} H</p>
+    <p><strong>Passagers :</strong> {{carPoolTrip.passengersFullName.length}}</p>
+  </div>
+
+  <div class="rating-section">
+    <label>Note :</label>
+    <div class="stars">
+      <ng-container *ngFor="let star of stars; let i = index">
+        <span
+          class="star"
+          [class.filled]="i < rating"
+          (click)="setRating(i + 1)"
+        >&#9733;</span>
+      </ng-container>
+    </div>
+
+    <label for="comment">Avis :</label>
+    <textarea id="comment" [(ngModel)]="comment" placeholder="Laisse ton avis ici..."></textarea>
+
+    <button class="btn btn-submit" (click)="submitReview()"[ngClass]="{disabled: comment == '' || rating == 0}">Envoyer</button>
+  </div>
+</div>

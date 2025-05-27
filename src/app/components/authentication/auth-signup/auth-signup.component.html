@@ -1,0 +1,58 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <div class="card">
+      <div class="card-body text-center" [formGroup]="userForm">
+        <div class="mb-4">
+          <i class="feather icon-user-plus auth-icon"></i>
+        </div>
+        <h3 class="mb-4">Inscription</h3>
+        <div class="input-group mb-3">
+          <input type="text"  class="form-control" [ngClass]="{'is-invalid': userForm.controls['firstName'].touched && userForm.controls['firstName'].invalid}" placeholder="Nom" formControlName="firstName"/>
+          <div class="invalid-feedback" *ngIf="userForm.controls['firstName'].invalid">Veuillez saisir le prénom.</div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text"  class="form-control" [ngClass]="{'is-invalid': userForm.controls['lastName'].touched && userForm.controls['lastName'].invalid}" placeholder="Prénom" formControlName="lastName"/>
+          <div class="invalid-feedback" *ngIf="userForm.controls['lastName'].invalid">Veuillez saisir le nom.</div>
+        </div>
+        <div class="input-group mb-3">
+          <select name="gender" formControlName="gender" class="form-control" [ngClass]="{'is-invalid': userForm.controls['gender'].touched && userForm.controls['gender'].invalid}">
+            <option value="homme">homme</option>
+            <option value="femme">femme</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="userForm.controls['gender'].invalid">gender est requis</div>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control"  [ngClass]="{'is-invalid': userForm.controls['phoneNumber'].touched && userForm.controls['phoneNumber'].invalid}" placeholder="Téléphone" formControlName="phoneNumber"/>
+          <div class="invalid-feedback" *ngIf="userForm.controls['phoneNumber'].invalid">Veuillez entrer un numéro de téléphone</div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" [ngClass]="{'is-invalid': userForm.controls['address'].touched && userForm.controls['address'].invalid}" placeholder="Adresse" formControlName="address"/>
+          <div class="invalid-feedback" *ngIf="userForm.controls['address'].invalid">Veuillez saisir l’adresse</div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" [ngClass]="{'is-invalid': userForm.controls['email'].touched && userForm.controls['email'].invalid}" placeholder="Email" formControlName="email"/>
+          <div class="invalid-feedback" *ngIf="userForm.controls['email'].invalid">email non valide</div>
+        </div>
+        <div class="input-group mb-4">
+          <input type="password" class="form-control" [ngClass]="{'is-invalid': userForm.controls['password'].touched && userForm.controls['password'].invalid}" placeholder="Password" formControlName="password" aria-describedby="passwordHelpBlock"/>
+          <small id="passwordHelpBlock" class="form-text text-muted">
+            Votre mot de passe doit comporter au moins 8 caractères.
+          </small>
+          <div class="invalid-feedback" *ngIf="userForm.controls['password'].invalid">mot de passe non valide</div>
+        </div>
+        <button class="btn btn-rounded btn-success shadow-2 mb-4" (click)="signUp()">S'inscrire</button>
+        <p class="mb-0 text-muted">
+          Vous avez déjà un compte?
+          <a [routerLink]="['/auth/signin']">Se connecter</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="profile-container card shadow p-4" *ngIf="user">
+  <div class="text-center">
+    <img [src]="src" alt="Profile" class="rounded-circle mb-2">
+    <h4>{{ user?.lastName  + ' ' + user?.firstName }}</h4>
+    <i class="fas fa-venus" *ngIf="user?.gender == 'femme'"></i>
+    <i class="fas fa-mars" *ngIf="user?.gender == 'homme'"></i>
+    <br/>
+  </div>
+
+  <hr>
+
+  <div>
+    <h5>
+      <span style="margin-left: 15px;">
+        <i class="fas fa-star"></i>
+        {{user.rate}} ({{user.rateCount}}) avis
+      </span>
+    </h5>
+
+    <ul class="list-unstyled">
+      <li *ngIf="user?.isDrivingLicenseVerified">
+        <i class="feather icon-check-circle text-primary me-2"></i>permis verifié
+      </li>
+      <li>
+        <i class="feather icon-check-circle text-primary me-2"></i>{{ user?.email }}
+      </li>
+      <li>
+        <i class="feather icon-check-circle text-primary me-2"></i>{{ user?.phoneNumber }}
+      </li>
+    </ul>
+    <ul class="list-unstyled ul-border" *ngFor="let comment of user.comments">
+      <li class="ml-25">
+        <span>
+          {{comment.from}}
+          <i class="fas fa-star"></i>
+          {{comment.rate}}
+      </span>
+      </li>
+      <li class="ml-25">
+        <span> {{comment.comment}}</span>
+      </li>
+      <li class="ml-25">
+        <span> <i class="feather icon-calendar"></i> {{comment.date | date:'MMMM y':'':'fr'}}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+

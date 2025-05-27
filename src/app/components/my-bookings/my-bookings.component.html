@@ -1,0 +1,60 @@
+<div class="container" *ngIf="carPoolTripsBooking && carPoolTripsBooking.length > 0">
+  <div class="row justify-content-md-center">
+
+    <div class="banner">
+
+      <div class="search-form col-6" *ngFor="let carPoolTrip of carPoolTripsBooking">
+        <strong>{{carPoolTrip.date}}</strong>
+        <div class="row">
+          <div class="col-6">
+            <div class="timeline-container">
+              <!-- Départ -->
+              <div class="city-info">
+                <div class="hour">{{carPoolTrip.start}}</div>
+                <div class="city">{{carPoolTrip.departure}}</div>
+              </div>
+
+              <!-- Ligne avec cercle au milieu -->
+              <div class="line"></div>
+
+              <!-- Arrivée -->
+              <div class="city-info">
+                <div class="hour">{{carPoolTrip.end}}</div>
+                <div class="city">{{carPoolTrip.arrival}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h3 style="float: inline-end;">{{carPoolTrip.totalPrice}} DT</h3>
+          </div>
+        </div>
+        <hr>
+        <span style="display: flex;">
+          <div class="pro-head" style="margin-top: -10px;">
+
+            <img [src]="carPoolTrip?.gender == 'homme'? hommeSrc : femmeSrc" class="img-radius" style="width: 50%;" alt="User-Profile-Image" />
+          </div>
+          <span>{{carPoolTrip.driverFullName}}</span>
+          <span style="margin-left: 15px;" class="badge m-r-5" [ngClass]="getStatusClasse(carPoolTrip.status)">
+            {{getStatusName(carPoolTrip.status)}}
+          </span>
+          <span style="margin-left: 15px;" *ngIf="carPoolTrip.canComment">
+            <a [routerLink]="['/book-trip-summary', carPoolTrip.carPoolTripId, carPoolTrip.driverId, carPoolTrip.passengerId]" class="dropdown-item">
+              Laissez un commentaire ?
+            </a>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container" *ngIf="!carPoolTripsBooking || carPoolTripsBooking.length == 0">
+  <div class="row justify-content-md-center">
+    <div class="col-3">
+      <img src="/assets/images/no-data.png">
+    </div>
+
+  </div>
+</div>

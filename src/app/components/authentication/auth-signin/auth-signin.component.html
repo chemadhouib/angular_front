@@ -1,0 +1,32 @@
+<div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="auth-bg">
+      <span class="r"></span>
+      <span class="r s"></span>
+      <span class="r s"></span>
+      <span class="r"></span>
+    </div>
+    <div class="card">
+      <div class="card-body text-center" [formGroup]="authForm">
+        <div class="mb-4">
+          <i class="feather icon-unlock auth-icon"></i>
+        </div>
+        <h3 class="mb-4">Login</h3>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" [ngClass]="{'is-invalid': authForm.controls['email'].touched && authForm.controls['email'].invalid}" placeholder="Email" formControlName="email"/>
+          <div class="invalid-feedback" *ngIf="authForm.controls['email'].invalid">email non valide</div>
+        </div>
+        <div class="input-group mb-4">
+          <input type="password" class="form-control" [ngClass]="{'is-invalid': authForm.controls['password'].touched && authForm.controls['password'].invalid}" placeholder="Password" formControlName="password" aria-describedby="passwordHelpBlock"/>
+
+          <div class="invalid-feedback" *ngIf="authForm.controls['password'].invalid">mot de passe non valide</div>
+        </div>
+        <button class="btn btn-rounded btn-success mb-4" (click)="login()">Login</button>
+        <p class="mb-0 text-muted">
+          Vous n'avez pas de compte?
+          <a [routerLink]="['/auth/signup']">S'inscrire</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

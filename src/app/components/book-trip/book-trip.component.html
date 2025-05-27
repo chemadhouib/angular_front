@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-2">
+      <h3>{{carPoolTrip?.date}}</h3>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="carPoolTrip">
+
+  <div class="col-6">
+
+    <div class="banner">
+      <div class="search-form">
+        <div class="row">
+          <div class="col-4">
+            <div class="timeline-container">
+              <!-- Départ -->
+              <div class="city-info">
+                <div class="hour">{{carPoolTrip?.start}}</div>
+                <div class="city">{{carPoolTrip?.departure}}</div>
+              </div>
+
+              <div class="line"></div>
+
+              <!-- Arrivée -->
+              <div class="arrival">
+                <div class="city">{{carPoolTrip?.arrival}}</div>
+                <div class="hour">{{carPoolTrip?.end}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <i class="fas fa-paw" style="color: green;" *ngIf="carPoolTrip.petsAllowed"> Animaux autorisés</i>
+            <span style="position: relative; display: block; margin-left: 12px; color: red;" *ngIf="!carPoolTrip.petsAllowed">
+              <i class="fas fa-ban" style="position: absolute; top: 5; left: 0;"></i>
+              <i class="fas fa-paw" style="position: absolute; top: 0; left: 0;">Animaux non autorisés</i>
+            </span>
+            <br/>
+            <i class="fas fa-smoking" style="color: green;" *ngIf="carPoolTrip.smokingAllowed"> Cigarette autorisées</i>
+            <i class="fas fa-smoking-ban" style="color: red;" *ngIf="!carPoolTrip.smokingAllowed"> Cigarette non autorisées</i>
+          </div>
+          <div class="col-4">
+            <h3 style="float: inline-end;">{{carPoolTrip?.price}} DT</h3>
+          </div>
+        </div>
+        <hr>
+        <span style="display: flex;">
+          <span>
+            <i class="fas fa-car fa-xl"></i>
+          </span>
+          <div class="pro-head" style="margin-top: -10px;">
+
+            <img [src]="carPoolTrip?.driverGender == 'homme'? hommeSrc : femmeSrc" class="img-radius" style="width: 50%;" alt="User-Profile-Image" />
+          </div>
+          <span>{{carPoolTrip?.driverFullName}}</span>
+          <span style="margin-left: 15px;">
+            <i class="fas fa-star"></i>
+            {{carPoolTrip?.rate}}
+          </span>
+          <span style="margin-left: 40%;" *ngIf="isUserConnected">
+            <i class="feather icon-arrow-right" style="cursor: pointer;" (click)="goToDriver(carPoolTrip.user_id)"></i>
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div class="banner" style="padding-top: 2%;">
+      <div class="search-form">
+        <h4 style="text-align: start;">Passagers</h4>
+        <div *ngIf="carPoolTrip?.passengers">
+
+          <span style="display: flex;" *ngFor="let passenger of carPoolTrip?.passengers">
+            <div class="pro-head" style="margin-top: -10px;">
+
+              <img [src]="passenger?.gender == 'homme'? hommeSrc : femmeSrc" class="img-radius" style="width: 50%;" alt="User-Profile-Image" />
+            </div>
+            <span>{{passenger.fullName}}</span>
+          </span>
+        </div>
+        <span *ngIf="!carPoolTrip?.passengers"> Aucun passager pour le moment</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 300px;" class="col-6 d-flex flex-column justify-content-center align-items-center gap-3">
+    <div class="banner" style="padding-top: 2%;width: 40%;">
+      <div class="search-form d-flex w-100 px-4">
+        <div class="row">
+
+          <div class="col-6"><span>{{passengersNumber}} passagers</span></div>
+          <div class="col-6"><span>{{passengersNumber * carPoolTrip.price}} DT</span></div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <button *ngIf="isUserConnected" class=" btn btn-rounded btn-success btn-book" (click)="sendBookingRequest()">Demande de réservation</button>
+    <button *ngIf="!isUserConnected" class=" btn btn-rounded btn-success btn-book" (click)="goToSigIn()">Connecter pour réserver</button>
+
+    </div>
+</div>

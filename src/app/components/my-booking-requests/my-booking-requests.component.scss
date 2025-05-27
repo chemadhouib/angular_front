@@ -1,0 +1,121 @@
+.banner {
+  text-align: center;
+  color: white;
+  display: block;
+
+  .banner-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+  }
+
+  .search-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 30px;
+    color: black;
+
+    input,
+    select {
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .radios {
+        display: flex;
+        gap: 1rem;
+
+        label {
+          font-weight: normal;
+        }
+
+        input {
+          margin-right: 0.3rem;
+        }
+      }
+    }
+
+  }
+}
+.timeline-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.city-info {
+  text-align: center;
+}
+
+.hour {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.city {
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.line {
+  position: relative;
+  height: 4px;
+  background-color: #ccc;
+  width: 150px;
+}
+
+.line::before,
+.line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #666;
+  border-radius: 50%;
+}
+
+.line::before {
+  left: 0; /* cercle au début */
+}
+
+.line::after {
+  right: 0; /* cercle à la fin */
+}
+.final-circle {
+  width: 12px; /* même taille que le premier cercle */
+  height: 12px;
+  background-color: #666;
+  border-radius: 50%;
+}
+
+.arrival {
+  text-align: center;
+}
+
+.arrival .city {
+  margin-top: 8px;
+}
+
+.action{
+  align-content: end;
+    flex: auto;
+}

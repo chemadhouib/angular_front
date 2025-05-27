@@ -1,0 +1,80 @@
+.banner {
+  color: white;
+  padding-left: 15%;
+
+  .banner-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+  }
+
+  .search-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0;
+    color: black;
+
+    input,
+    select {
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      label {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .radios {
+        display: flex;
+        gap: 1rem;
+
+        label {
+          font-weight: normal;
+        }
+
+        input {
+          margin-right: 0.3rem;
+        }
+      }
+    }
+
+    button {
+      padding: 0.7rem;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+
+
+    }
+  }
+}
+.tarjet{
+  background: url('../../../../assets/images/publier-trajet-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: right;
+}
+.form-control.is-invalid {
+  border-color: var(--bs-form-invalid-border-color)!important;
+  padding-right: calc(1.5em + 0.75rem);
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}

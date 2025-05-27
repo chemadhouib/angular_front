@@ -1,0 +1,48 @@
+<ul class="navbar-nav">
+  <li *ngIf="isUserLoggedIn">
+    <button class="btn btn-rounded btn-outline-success connect" (click)="goToNewTrip()">
+      <i class="feather icon-plus-circle">
+        Publier un trajet
+      </i>
+    </button>
+</li>
+  <li>
+    <div class="dropdown drp-user" ngbDropdown placement="auto" *ngIf="isUserLoggedIn">
+      <a href="javascript:" ngbDropdownToggle data-toggle="dropdown">
+        <i class="icon feather icon-user"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-end profile-notification" ngbDropdownMenu>
+        <div class="pro-head">
+          <img [src]="user?.gender == 'homme' ? hommeSrc: femmeSrc" class="img-radius" alt="User-Profile-Image" />
+          <span>{{user.firstName}} {{user.lastName}}</span>
+          <a (click)="logout()" style="cursor: pointer;" class="dud-logout" title="Logout">
+            <i class="feather icon-log-out"></i>
+          </a>
+        </div>
+        <ul class="pro-body">
+          <li>
+            <a [routerLink]="['/user-profile']" routerLinkActive="router-link-active"  class="dropdown-item">
+              <i class="feather icon-user"></i>
+              Profile
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/my-booking-requests']" class="dropdown-item">
+              <i class="feather icon-calendar"></i>
+              Les demandes de réservation
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/my-bookings']" class="dropdown-item">
+              <i class="feather icon-calendar"></i>
+              Mes réservations
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div *ngIf="!isUserLoggedIn">
+      <button class="btn btn-rounded btn-outline-success connect" (click)="goToSignIn()">Se connecter</button>
+    </div>
+  </li>
+</ul>
